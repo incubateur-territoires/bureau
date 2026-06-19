@@ -1,0 +1,24 @@
+{
+  "name": "bureau-anct",
+  "description": "Portail ProConnect pour les agents de l'ANCT",
+  "force_https": true,
+  "sticky_session": false,
+  "static": {
+    "paths": ["/_next/static"]
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/Scalingo/nodejs-buildpack.git"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "NEXTAUTH_URL": "$SCALINGO_APP_URL",
+    "AUTH_ENABLED": "true"
+  },
+  "notifications": {
+    "deploy": true,
+    "restart": true,
+    "crash": true
+  }
+}
