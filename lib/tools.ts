@@ -4,6 +4,8 @@ export interface Tool {
   description: string
   url: string
   icon: string
+  /** Page de documentation / centre d'aide du produit. Optionnel. */
+  helpUrl?: string
   beta?: boolean
   targetBlank?: boolean
 }
@@ -15,6 +17,7 @@ export const tools: Tool[] = [
     description: "Espace de stockage",
     url: "https://fichiers.suite.anct.gouv.fr",
     icon: "/icons/fichiers.svg",
+    helpUrl: "https://aide.suite.anct.gouv.fr/socle/fichiers",
     targetBlank: true,
   },
   {
@@ -31,6 +34,8 @@ export const tools: Tool[] = [
     description: "Visioconférence et transcription",
     url: "https://visio.suite.anct.gouv.fr",
     icon: "/icons/visio.png",
+    helpUrl:
+      "https://docs.numerique.gouv.fr/docs/2b2d85c6-f76f-4c0a-83eb-fa494678eb10/",
     beta: true,
     targetBlank: true,
   },
@@ -55,7 +60,8 @@ export const tools: Tool[] = [
     name: "Grist",
     description: "Tableur et base de données",
     url: "https://grist.incubateur.anct.gouv.fr",
-    icon: "/icons/grist.svg",
+    icon: "/icons/grist.png",
+    helpUrl: "https://support.getgrist.com/",
     targetBlank: true,
   },
   {
@@ -64,6 +70,8 @@ export const tools: Tool[] = [
     description: "Agent conversationnel",
     url: "https://assistant.numerique.gouv.fr",
     icon: "/icons/ai.svg",
+    helpUrl:
+      "https://docs.numerique.gouv.fr/docs/5be2a9c9-f6fc-494a-a831-1354b1de5c1b/",
     beta: true,
     targetBlank: true,
   },
@@ -81,6 +89,8 @@ export const tools: Tool[] = [
     description: "Tchat interministériel",
     url: "https://tchap.gouv.fr",
     icon: "/icons/tchap.svg",
+    helpUrl:
+      "https://docs.numerique.gouv.fr/docs/b1ba66ea-2760-4608-a1ac-aa3748c6358f/",
     targetBlank: true,
   },
   {

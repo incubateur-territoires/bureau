@@ -34,4 +34,15 @@ describe("catalogue d'applications (tools)", () => {
       expect(t.targetBlank, `${t.id} devrait ouvrir un nouvel onglet`).toBe(true)
     }
   })
+
+  it("ne définit helpUrl qu'avec une URL http valide", () => {
+    for (const t of tools) {
+      if (t.helpUrl !== undefined) {
+        expect(
+          t.helpUrl.startsWith("http"),
+          `${t.id} : helpUrl doit être une URL http`,
+        ).toBe(true)
+      }
+    }
+  })
 })

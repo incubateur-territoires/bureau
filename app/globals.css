@@ -306,15 +306,53 @@ body {
 }
 
 .app-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  text-decoration: none;
-  color: inherit;
   padding: 8px;
   border-radius: 10px;
   transition: background-color 0.15s ease;
+}
+.app-card__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+/* Lien étiré : couvre toute la carte → clic n'importe où ouvre l'app */
+.app-card__main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.app-card__main:focus-visible::after {
+  outline: 2px solid var(--anct-blue);
+  outline-offset: -2px;
+}
+/* Lien d'aide « ? » : au-dessus du ::after pour rester cliquable */
+.app-card__help {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid var(--anct-border);
+  color: var(--anct-blue);
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.app-card__help:hover {
+  background-color: var(--anct-blue);
+  color: #ffffff;
 }
 .app-card:hover {
   background-color: #f4f5fc;

@@ -15,6 +15,7 @@ const sampleTools: Tool[] = [
     description: "Éditeur collaboratif",
     url: "https://docs.example.gouv.fr",
     icon: "/icons/docs.svg",
+    helpUrl: "https://docs.example.gouv.fr/aide",
     targetBlank: true,
   },
   {
@@ -51,14 +52,29 @@ describe("<Portal>", () => {
 
   it("ouvre les liens externes dans un nouvel onglet de façon sûre", () => {
     render(<Portal userName="X" tools={sampleTools} />)
-    const link = screen.getByRole("link", { name: /Docs/ })
+    const link = screen.getByRole("link", { name: "Ouvrir Docs" })
     expect(link.getAttribute("target")).toBe("_blank")
     expect(link.getAttribute("rel")).toContain("noopener")
   })
 
   it("n'ajoute pas target=_blank aux liens internes (#)", () => {
     render(<Portal userName="X" tools={sampleTools} />)
-    const link = screen.getByRole("link", { name: /Fichiers/ })
+    const link = screen.getByRole("link", { name: "Ouvrir Fichiers" })
     expect(link.getAttribute("target")).toBeNull()
+  })
+
+  it("affiche un lien de documentation quand helpUrl est présent", () => {
+    render(<Portal userName="X" tools={sampleTools} />)
+    const help = screen.getByRole("link", { name: "Documentation de Docs" })
+    expect(help.getAttribute("href")).toBe("https://docs.example.gouv.fr/aide")
+    expect(help.getAttribute("target")).toBe("_blank")
+    expect(help.getAttribute("rel")).toContain("noopener")
+  })
+
+  it("n'affiche pas de lien d'aide quand helpUrl est absent", () => {
+    render(<Portal userName="X" tools={sampleTools} />)
+    expect(
+      screen.queryByRole("link", { name: "Documentation de Fichiers" }),
+    ).toBeNull()
   })
 })
