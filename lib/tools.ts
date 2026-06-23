@@ -36,7 +36,7 @@ export const tools: Tool[] = [
   },
   {
     id: "transcript",
-    name: "Transcript",
+    name: "Transcripts",
     description: "Transcription audio en texte",
     url: "https://transcripts.numerique.gouv.fr",
     icon: "/icons/transcript.svg",
