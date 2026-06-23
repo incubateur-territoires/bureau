@@ -1,0 +1,31 @@
+# Dépendances racine (~3 Go) : inutiles au runtime car le serveur standalone
+# embarque son propre node_modules tracé dans .next/standalone.
+# C'est cette exclusion qui fait passer le slug sous la limite Scalingo.
+/node_modules
+
+# Build cache (lourd, non nécessaire en runtime)
+.next/cache
+
+# Artifacts de test
+coverage
+playwright-report
+test-results
+.playwright-mcp
+.omo
+
+# Logs
+*.log
+logs
+
+# Outillage et config non nécessaire en runtime
+.github
+Dockerfile
+vitest.config.mts
+eslint.config.mjs
+tsconfig.json
+.env.template
+
+# Docs
+README.md
+SECURITY.md
+LICENSE
