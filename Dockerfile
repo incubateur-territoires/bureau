@@ -5,7 +5,7 @@
 # (voir https://nextjs.org/docs/app/api-reference/config/next-config-js/output)
 
 # Stage 1: Build de l'application
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Image de production
-FROM node:20-alpine AS runner
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 
