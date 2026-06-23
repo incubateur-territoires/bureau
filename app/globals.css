@@ -312,6 +312,12 @@ body {
   align-items: center;
   text-align: center;
   padding: 8px;
+  /* Borne la carte et la centre dans sa cellule de grille : le survol et le
+     lien d'aide « ? » se calent ainsi sur la carte visible, pas sur toute
+     la colonne (qui est plus large que le contenu en tablette/desktop). */
+  width: 100%;
+  max-width: 200px;
+  margin-inline: auto;
   border-radius: 10px;
   transition: background-color 0.15s ease;
 }
