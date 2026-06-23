@@ -1,9 +1,9 @@
 "use client"
 
 import { LaGaufre, UserMenu } from "@gouvfr-lasuite/ui-kit"
-import { signOut } from "next-auth/react"
 import Link from "next/link"
 import { useSyncExternalStore } from "react"
+import { logout } from "@/lib/auth-actions"
 import { initials } from "@/lib/initials"
 import { MarianneBrand } from "./MarianneBrand"
 
@@ -61,7 +61,7 @@ export function Header({ user }: { user: HeaderUser | null }) {
         ) : (
           <UserMenu
             user={{ full_name: user.name ?? undefined, email: user.email }}
-            logout={() => signOut({ callbackUrl: "/" })}
+            logout={() => logout()}
           />
         )}
       </div>

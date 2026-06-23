@@ -1,6 +1,5 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-import { authConfig } from "./auth.config"
 import { parseProConnectUserinfo } from "./infrastructure/proconnect/userinfo"
 import { getOidcConfig } from "./infrastructure/proconnect/discovery"
 import { authEnabled, authSecret, devBypassEmail, env } from "./env"
@@ -32,8 +31,23 @@ function devBypassProvider(email: string) {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  ...authConfig,
   secret: authSecret,
+  session: { strategy: "jwt" },
+  pages: { signIn: "/connexion" },
+  // Déploiement auto-hébergé (Scalingo) derrière un proxy de confiance.
+  // Sans cela, Auth.js v5 lève `UntrustedHost` en production.
+  trustHost: true,
+  callbacks: {
+    async jwt({ token, account }) {
+      // On conserve l'id_token pour la déconnexion RP-initiated (id_token_hint).
+      if (account?.id_token) token.idToken = account.id_token
+      return token
+    },
+    async session({ session, token }) {
+      session.idToken = token.idToken
+      return session
+    },
+  },
   providers: authEnabled
     ? [
         {
@@ -44,7 +58,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           issuer: env.PROCONNECT_ISSUER!,
           clientId: env.PROCONNECT_CLIENT_ID!,
           clientSecret: env.PROCONNECT_CLIENT_SECRET!,
-          checks: ["state", "pkce"],
+          // ProConnect/AgentConnect exige `nonce` (comme FranceConnect),
+          // en plus de `state` et PKCE.
+          checks: ["pkce", "state", "nonce"],
           authorization: {
             params: {
               scope: "openid given_name usual_name email",

@@ -16,6 +16,8 @@ const envSchema = z.object({
   AUTH_DEV_BYPASS_EMAIL: z.string().email().optional(),
   AUTH_SECRET: z.string().min(1).optional(),
   NEXTAUTH_SECRET: z.string().min(1).optional(),
+  AUTH_URL: z.string().url().optional(),
+  NEXTAUTH_URL: z.string().url().optional(),
   PROCONNECT_ISSUER: z.string().url().optional(),
   PROCONNECT_CLIENT_ID: z.string().min(1).optional(),
   PROCONNECT_CLIENT_SECRET: z.string().min(1).optional(),
@@ -38,6 +40,15 @@ function parseEnv(): Env {
 export const env = parseEnv()
 
 export const isProduction = env.NODE_ENV === "production"
+
+/**
+ * URL publique canonique de l'application.
+ * Sert notamment de `post_logout_redirect_uri` pour la déconnexion ProConnect.
+ */
+export const appUrl =
+  env.AUTH_URL ??
+  env.NEXTAUTH_URL ??
+  (!isProduction ? "http://localhost:3000" : undefined)
 
 export const authEnabled =
   env.AUTH_ENABLED.trim().toLowerCase() !== "false"

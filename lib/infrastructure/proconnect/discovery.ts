@@ -5,6 +5,7 @@ const oidcConfigSchema = z.object({
   issuer: z.string(),
   jwks_uri: z.string().url(),
   userinfo_endpoint: z.string().url(),
+  end_session_endpoint: z.string().url().optional(),
 })
 
 type OidcConfig = z.infer<typeof oidcConfigSchema>
