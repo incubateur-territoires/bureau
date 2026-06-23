@@ -368,6 +368,77 @@ body {
   margin: 3px 0 0;
 }
 
+.legal {
+  background-color: #ffffff;
+  min-height: calc(100vh - 70px);
+  padding: 48px 24px 64px;
+}
+.legal__body {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.legal__title {
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--anct-text);
+  margin: 0 0 8px;
+}
+.legal__updated {
+  color: var(--anct-text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 32px;
+}
+.legal__content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--anct-text);
+}
+.legal__content h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--anct-blue);
+  margin: 32px 0 12px;
+}
+.legal__content h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 22px 0 8px;
+}
+.legal__content p {
+  margin: 0 0 14px;
+}
+.legal__content ul {
+  margin: 0 0 14px;
+  padding-left: 20px;
+}
+.legal__content li {
+  margin-bottom: 6px;
+}
+.legal__content a {
+  color: var(--anct-blue);
+}
+.legal__content a:hover {
+  text-decoration: underline;
+}
+.legal__content strong {
+  font-weight: 700;
+}
+.legal__content blockquote {
+  margin: 0 0 16px;
+  padding: 14px 18px;
+  background-color: var(--anct-band);
+  border-left: 3px solid var(--anct-blue);
+  border-radius: 4px;
+}
+.legal__content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  background-color: #f4f5fc;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
 @media (max-width: 900px) {
   .app-grid {
     grid-template-columns: repeat(2, 1fr);
